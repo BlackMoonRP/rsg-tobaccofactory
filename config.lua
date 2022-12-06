@@ -17,30 +17,30 @@ Config.TobaccoFactoryLocations = {
 Config.FactoryOptions = {
 
     ["Dry Tobacco Leaves"] = {
-		name = "Dry Tobacco",
+        name = "Dry Tobacco",
         factorytime = 5000,
         factoryitems = {
             [1] = { item = "tobacco", amount = 1 },
         },
         receive = "drytobacco"
     },
-	
+    
     ["Make a Cigar"] = {
-		name = "Cigar",
+        name = "Cigar",
         factorytime = 10000,
         factoryitems = {
             [1] = { item = "drytobacco", amount = 2 },
         },
         receive = "cigar"
     },
-	
+    
     ["Craft Box of Cigars"] = {
-		name = "Box of Cigars",
+        name = "Box of Cigars",
         factorytime = 20000,
         factoryitems = {
             [1] = { item = "cigar", amount = 10 },
         },
         receive = "cigarbox"
     },
-	
+    
 }
