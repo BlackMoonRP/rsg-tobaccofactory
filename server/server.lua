@@ -1,11 +1,11 @@
-local QRCore = exports['qr-core']:GetCoreObject()
+local RSGCore = exports['rsg-core']:GetCoreObject()
 
 -- check player has items
-QRCore.Functions.CreateCallback('rsg-tobaccofactory:server:itemcheck', function(source, cb, factoryitems)
+RSGCore.Functions.CreateCallback('rsg-tobaccofactory:server:itemcheck', function(source, cb, factoryitems)
     local src = source
     local hasItems = false
     local icheck = 0
-    local Player = QRCore.Functions.GetPlayer(src)
+    local Player = RSGCore.Functions.GetPlayer(src)
     for k, v in pairs(factoryitems) do
         if Player.Functions.GetItemByName(v.item) and Player.Functions.GetItemByName(v.item).amount >= v.amount then
             icheck = icheck + 1
@@ -13,7 +13,7 @@ QRCore.Functions.CreateCallback('rsg-tobaccofactory:server:itemcheck', function(
                 cb(true)
             end
         else
-            TriggerClientEvent('QRCore:Notify', src, 'You don\'t have the required items!', 'error')
+            TriggerClientEvent('RSGCore:Notify', src, 'You don\'t have the required items!', 'error')
             cb(false)
             return
         end
@@ -24,7 +24,7 @@ end)
 RegisterServerEvent('rsg-tobaccofactory:server:giveitem')
 AddEventHandler('rsg-tobaccofactory:server:giveitem', function(factoryitems, receive)
     local src = source
-    local Player = QRCore.Functions.GetPlayer(src)
+    local Player = RSGCore.Functions.GetPlayer(src)
     -- remove factoryitems
     for k, v in pairs(factoryitems) do
         if Config.Debug == true then
@@ -32,10 +32,10 @@ AddEventHandler('rsg-tobaccofactory:server:giveitem', function(factoryitems, rec
             print(v.amount)
         end
         Player.Functions.RemoveItem(v.item, v.amount)
-        TriggerClientEvent('inventory:client:ItemBox', src, QRCore.Shared.Items[v.item], "remove")
+        TriggerClientEvent('inventory:client:ItemBox', src, RSGCore.Shared.Items[v.item], "remove")
     end
     -- add items
     Player.Functions.AddItem(receive, 1)
-    TriggerClientEvent('inventory:client:ItemBox', src, QRCore.Shared.Items[receive], "add")
-    TriggerClientEvent('QRCore:Notify', src, 'factory job finished', 'success')
+    TriggerClientEvent('inventory:client:ItemBox', src, RSGCore.Shared.Items[receive], "add")
+    TriggerClientEvent('RSGCore:Notify', src, 'factory job finished', 'success')
 end)

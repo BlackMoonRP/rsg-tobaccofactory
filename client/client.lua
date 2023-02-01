@@ -1,11 +1,11 @@
-local QRCore = exports['qr-core']:GetCoreObject()
+local RSGCore = exports['rsg-core']:GetCoreObject()
 
 ------------------------------------------------------------------------------------------------------
 
 -- prompts and blips
 Citizen.CreateThread(function()
     for tobacco, v in pairs(Config.TobaccoFactoryLocations) do
-        exports['qr-core']:createPrompt(v.prompt, v.coords, QRCore.Shared.Keybinds['J'], 'Open ' .. v.name, {
+        exports['rsg-core']:createPrompt(v.prompt, v.coords, RSGCore.Shared.Keybinds['J'], 'Open ' .. v.name, {
             type = 'client',
             event = 'rsg-tobaccofactory:client:factorymenu',
             args = {},
@@ -47,7 +47,7 @@ RegisterNetEvent('rsg-tobaccofactory:client:factorymenu', function()
         local item = {}
         local text = ""
         for k, v in pairs(v.factoryitems) do
-            text = text .. "- " .. QRCore.Shared.Items[v.item].label .. ": " .. v.amount .. "x <br>"
+            text = text .. "- " .. RSGCore.Shared.Items[v.item].label .. ": " .. v.amount .. "x <br>"
         end
         factoryMenu[#factoryMenu + 1] = {
             header = k,
@@ -67,17 +67,17 @@ RegisterNetEvent('rsg-tobaccofactory:client:factorymenu', function()
         header = "❌ | Close Menu",
         txt = '',
         params = {
-            event = 'qr-menu:closeMenu',
+            event = 'rsg-menu:closeMenu',
         }
     }
-    exports['qr-menu']:openMenu(factoryMenu)
+    exports['rsg-menu']:openMenu(factoryMenu)
 end)
 
 ------------------------------------------------------------------------------------------------------
 
 -- check player has the items
 RegisterNetEvent('rsg-tobaccofactory:client:checkitems', function(data)
-    QRCore.Functions.TriggerCallback('rsg-tobaccofactory:server:itemcheck', function(hasRequired)
+    RSGCore.Functions.TriggerCallback('rsg-tobaccofactory:server:itemcheck', function(hasRequired)
     if (hasRequired) then
         if Config.Debug == true then
             print("passed")
@@ -95,7 +95,7 @@ end)
 -- start factory
 RegisterNetEvent('rsg-tobaccofactory:client:startfactory', function(name, item, factorytime, receive)
     local factoryitems = Config.FactoryOptions[item].factoryitems
-    QRCore.Functions.Progressbar('make-product', 'Making a '..name, factorytime, false, true, {
+    RSGCore.Functions.Progressbar('make-product', 'Making a '..name, factorytime, false, true, {
         disableMovement = true,
         disableCarMovement = false,
         disableMouse = false,

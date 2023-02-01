@@ -17,4 +17,9 @@ shared_scripts {
     'config.lua'
 }
 
+dependencies {
+    'rsg-core',
+    'rsg-menu',
+}
+
 lua54 'yes'
